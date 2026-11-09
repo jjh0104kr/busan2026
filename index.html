@@ -805,7 +805,7 @@ async function runStep() {
     vn.i++; if (vn.i < vn.steps.length) runStep();
     return;
   }
-  if (st.type === 'call') { await st.fn(); return; }
+  if (st.type === 'callEnd') { await st.fn(); return; }
   if (st.type === 'quiz') {
     if (vn.view !== 'quiz') { setView('quiz'); await sleep(420); }
     if (tk !== vn.token) return;
@@ -4242,7 +4242,7 @@ function gateReview(prev, btnId) {      // 이전 챕터 랭크가 B 이하이�
   go('vn', () => { vnEl.classList.add('review'); vnPrepare([
     { type: 'narr', segs: [{ s: '이전 챕터의 랭크가 ' }, { s: r, b: 1, em: 1 }, { s: ' 등급이어서\n복습을 진행해야 합니다!\n꼼꼼하게 풀어봅시다!' }] },
     { type: 'quiz', review: true, retry: '다시 생각해보자', questions: reviewQuestions(prev) },
-    { type: 'call', fn: async () => { vnEl.classList.remove('review'); chReview[prev] = true; busy = false; document.getElementById(btnId).click(); } },
+    { type: 'callEnd', fn: async () => { vnEl.classList.remove('review'); chReview[prev] = true; busy = false; document.getElementById(btnId).click(); } },
   ]); }).then(async () => { await sleep(300); await runStep(); });
   return true;
 }
