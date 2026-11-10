@@ -313,6 +313,7 @@
     .dialog .next.on, .narr-next.on, .caret, .tb:hover .sheen::before, .tb:focus-visible .sheen::before { animation: none; }
     .tb:hover, .tb:focus-visible, .tb:active { transform: none; }
   }
+#imgBoy:not([src]),#imgGrand:not([src]){display:none}
 </style>
 </head>
 <body>
@@ -380,8 +381,8 @@
     <canvas class="frozen" id="frozen" width="1280" height="720"></canvas>
     <img class="bgphoto" id="bgPhoto" alt="">
     <div class="scene">
-      <div class="portrait dim" id="pBoy"><img id="imgBoy" alt="손자"></div>
-      <div class="portrait dim" id="pGrand"><img id="imgGrand" alt="할아버지"></div>
+      <div class="portrait dim" id="pBoy"><img id="imgBoy" alt=""></div>
+      <div class="portrait dim" id="pGrand"><img id="imgGrand" alt=""></div>
       <div class="vig"></div>
     </div>
     <div class="photo-wrap"><img class="photo-bg" id="photoBg" alt=""><div class="photo-frame"><img id="photo" alt=""></div></div>
