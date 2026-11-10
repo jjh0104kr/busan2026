@@ -91,6 +91,15 @@
   .tb:hover .fill, .tb:focus-visible .fill, .tb:hover .ring, .tb:focus-visible .ring { opacity: 1; }
   .tb:hover .sheen::before, .tb:focus-visible .sheen::before { animation: sheen .8s ease-out 1 forwards; }
   .tb:active { transform: scale(.99); }
+  .site-btn { overflow: hidden; transition: filter .22s ease, transform .18s ease, background .2s ease; }
+  .site-btn::before { content: ""; position: absolute; top: 0; bottom: 0; left: -40%; width: 34%; background: linear-gradient(100deg, transparent, rgba(255,242,205,.55), transparent); transform: skewX(-18deg); opacity: 0; pointer-events: none; }
+  .site-btn:hover, .site-btn:focus-visible { background: rgba(48,34,18,.9) !important; filter: drop-shadow(0 0 3px rgba(255,225,150,.9)) drop-shadow(0 0 10px rgba(255,190,90,.6)); transform: scale(1.03); outline: none; }
+  .site-btn:hover::before, .site-btn:focus-visible::before { animation: sheen .8s ease-out 1 forwards; }
+  #setSite:hover, #setSite:focus-visible { background: #f7dc90 !important; filter: drop-shadow(0 0 6px rgba(255,200,100,.7)); }
+  .site-btn:active { transform: scale(.98); }
+  .cred-tool { position: absolute; bottom: 3.2%; z-index: 6; padding: 9px 22px; font: 700 15px 'Noto Sans KR',sans-serif; letter-spacing: .3px; color: #f3e4b8; background: rgba(28,20,12,.8); border: 1.5px solid rgba(217,178,90,.8); box-shadow: 0 2px 8px rgba(0,0,0,.4); cursor: pointer; }
+  #btnSources.cred-tool { border-radius: 9px 0 0 9px; border-right-width: .75px; }
+  #btnAiTools.cred-tool { border-radius: 0 9px 9px 0; border-left-width: .75px; }
   @keyframes sheen { 0% { left: -40%; opacity: 1; } 100% { left: 110%; opacity: 1; } }
   .tb.sm .fill, .tb.sm .sheen { clip-path: polygon(5.2% 0, 94.8% 0, 100% 17.4%, 100% 82.6%, 94.8% 100%, 5.2% 100%, 0 82.6%, 0 17.4%); }
   #stage.on-credits .mute { top: 52px; }   /* 제작자 그림 오른쪽 위 글씨를 가리지 않게 */
@@ -310,8 +319,8 @@
   .cred-pin.big .ov i + i { margin-top: 5px; }
 
   @media (prefers-reduced-motion: reduce) {
-    .dialog .next.on, .narr-next.on, .caret, .tb:hover .sheen::before, .tb:focus-visible .sheen::before { animation: none; }
-    .tb:hover, .tb:focus-visible, .tb:active { transform: none; }
+    .dialog .next.on, .narr-next.on, .caret, .tb:hover .sheen::before, .tb:focus-visible .sheen::before, .site-btn:hover::before, .site-btn:focus-visible::before { animation: none; }
+    .tb:hover, .tb:focus-visible, .tb:active, .site-btn:hover, .site-btn:active { transform: none; }
   }
 #imgBoy:not([src]),#imgGrand:not([src]){display:none}
 </style>
@@ -322,6 +331,7 @@
   <!-- 타이틀 -->
   <section id="title" class="screen active">
     <img class="title-art" id="imgTitle" alt="피란의 기억을 잇다">
+    <button id="btnSite" class="site-btn" aria-label="게임 공식 사이트" style="position:absolute;left:1.4%;top:80.4%;width:16%;padding:6px 0;font:700 14px 'Noto Sans KR',sans-serif;letter-spacing:.5px;color:#f3e4b8;background:rgba(28,20,12,.78);border:1.5px solid rgba(217,178,90,.85);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.45);cursor:pointer;z-index:5;">게임 공식 사이트 ↗</button>
     <img class="school-logo" id="imgLogo" alt="광안중학교" style="left:1.4%;top:86%;width:16%">
       <button class="tb" id="btnStart" aria-label="게임 시작" style="left:60.59%;top:50.69%;width:21.77%;height:8.5%"><span class="fill"></span><span class="sheen"></span><svg class="ring" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="3.8,0 96.2,0 100,17.5 100,82.5 96.2,100 3.8,100 0,82.5 0,17.5"/></svg></button>
       <button class="tb" id="btnContinue" aria-label="이어하기" style="left:60.59%;top:61.42%;width:21.77%;height:8.39%"><span class="fill"></span><span class="sheen"></span><svg class="ring" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="3.8,0 96.2,0 100,17.5 100,82.5 96.2,100 3.8,100 0,82.5 0,17.5"/></svg></button>
@@ -374,6 +384,8 @@
       <button class="cred-pin" style="left:77.392%;top:68.793%;width:7.356%;height:13.716%" aria-label="3308 박차미 — 챕터 2 · 부산항 · 국제시장, 스토리 구상 및 제작"><span class="ov"><b>챕터 2</b><em>부산항 · 국제시장</em><i>스토리 구상</i><i>및 제작</i></span></button>
       <button class="cred-pin big" style="left:35.945%;top:22.754%;width:28.05%;height:19.351%" aria-label="노재훈 — 동아리 담당 교사, 2026 광안중 역사교사, 본 프로젝트 [피란의 기억을 잇다] 총괄 및 제작"><span class="ov"><b>동아리 담당 교사</b><em>노재훈</em><i>2026 광안중 역사교사</i><i>본 프로젝트 [피란의 기억을 잇다] 총괄 및 제작</i></span></button>
     </div>
+    <button id="btnSources" class="site-btn cred-tool" style="right:calc(1.6% + 104px);width:104px;">출처</button>
+    <button id="btnAiTools" class="site-btn cred-tool" style="right:1.6%;width:104px;">AI 도구</button>
   </section>
 
   <!-- 대화 -->
@@ -595,11 +607,11 @@ addEventListener('keydown', e => { if (e.code === 'KeyM' && !e.repeat && !(e.tar
 
 // 버튼 소리 (마우스를 올릴 때 / 눌렀을 때)
 document.addEventListener('mouseover', e => {
-  const el = e.target.closest && e.target.closest('.tb, .plate:not(:disabled), .back, .ch-bar, .q-opt, .mute, .home-btn, .cred-pin');
+  const el = e.target.closest && e.target.closest('.tb, .site-btn, .plate:not(:disabled), .back, .ch-bar, .q-opt, .mute, .home-btn, .cred-pin');
   if (el && !el.contains(e.relatedTarget)) SFX.hover();
 });
 document.addEventListener('click', e => {
-  const el = e.target.closest && e.target.closest('.tb, .plate, .back, .ch-bar, .home-btn');
+  const el = e.target.closest && e.target.closest('.tb, .site-btn, .plate, .back, .ch-bar, .home-btn');
   if (!el || el.disabled) return;
   if (el.id === 'btnContinue') { if (hasSave()) SFX.click(); else SFX.blocked(); }
   else if (el.id === 'btnBack' || el.id === 'homeBtn' || el.id === 'btnCreditsBack') SFX.back();
@@ -1006,6 +1018,7 @@ function showCredHint() {         // 제작자 화면 안내: 클릭하면 사�
   const hide = () => { el.style.opacity = '0'; setTimeout(() => el.remove(), 260); host.removeEventListener('click', hide, true); };
   host.addEventListener('click', hide, true);
 }
+$('#btnSite').addEventListener('click', () => { SFX.click(); window.open('https://jjh0104kr.github.io/webbusan2026/', '_blank', 'noopener'); });
 $('#btnCredits').addEventListener('click', async () => { if (busy) return; busy = true; await go('credits'); busy = false; showCredHint(); });
 
 const CRED_MSG = {
@@ -1094,6 +1107,69 @@ credPins.forEach((el, i) => {
 });
 document.addEventListener('click', () => credPins.forEach(o => o.classList.remove('show')));
 
+
+/* ─────────── 제작자 화면: 출처 · AI 도구 ─────────── */
+const SOURCES = [{"tab": "전체", "title": "피란 생활", "items": [{"t": "채영희, 황경숙, 한혜경, 정혜란, 남태수, 남인숙, 문미진, 『6.25 피란생활사: 피란민의 삶과 기억』, 2016", "u": ""}, {"t": "부산광역시, 『피란수도 부산 구술채록 및 구술자료집 발간 학술연구용역 최종보고서: 피란, 그때 그 사람들』, 2021", "u": ""}, {"t": "김기섭 외 35인, 『부산 역사 산책』, 2020", "u": ""}, {"t": "부산역사문화대전, 「피란민의 부산 정착」", "u": "https://www.grandculture.net/busan/toc/GC04219017"}, {"t": "피란수도 부산유산 (부산광역시 공식 사이트)", "u": "https://www.busan.go.kr/wartime_capital/index"}]}, {"tab": "챕터 1", "title": "아미동 비석마을", "items": [{"t": "심현호, 『아미동 비석마을 사람들 이야기(부산 근현대 구술자료집 5)』, 2019", "u": ""}, {"t": "부산광역시, 피란수도 부산유산 – 부산 아미동 비석마을 피란민 주거지", "u": "https://www.busan.go.kr/wartime_capital_eng/busanheritage08"}, {"t": "부산광역시, 「아미동 비석마을 피란민 주거지」, 부산시의 첫 번째 등록문화재로 등록! (보도자료, 2022. 1. 5.)", "u": "https://www.busan.go.kr/nbtnewsBU/1516425"}, {"t": "부산광역시 부산시보, 「아미동 대성사와 비석 전설」", "u": "http://www.busan.go.kr/news/totalnews01/view?dataNo=63275&curPage=36"}, {"t": "부산시보, 대성사 (「부산 농악 태동지 아미산 대성사」)", "u": "https://www.busan.go.kr/news/storyreport/view?dataNo=48213"}]}, {"tab": "챕터 2", "title": "부산항, 하역노동, 40계단, 국제시장, 국밥, 국제시장 대화재", "items": [{"t": "부산근현대역사관, 전시 자료", "u": ""}, {"t": "비짓부산, 과거의 흔적과 미래를 잇는 교차점, '부산항 제1부두'", "u": "https://www.visitbusan.net/index.do?menuCd=DOM_000000201001001000&uc_seq=2187&lang_cd=ko"}, {"t": "피란수도 부산 유산 사이트 (부산항 제1부두)", "u": "https://www.busan.go.kr/wartime_capital_eng/busanheritage05"}, {"t": "비짓부산, 지나간 시절을 되짚어 오르는 40계단", "u": "https://www.visitbusan.net/kr/index.do?menuCd=DOM_000000201001001000&uc_seq=364&lang_cd=ko"}, {"t": "위키백과, 국제시장 / 깡통시장", "u": "https://ko.wikipedia.org/wiki/%EA%B5%AD%EC%A0%9C%EC%8B%9C%EC%9E%A5"}, {"t": "부산역사문화대전, 국제시장 대화재", "u": "https://busan.grandculture.net/Contents/Contents?dataType=01&contents_id=GC04200975"}, {"t": "연합뉴스, 차근호, [정전 70년, 피란수도 부산] (22) 피란민 고픈 배 채운 돼지국밥, 2023. 8. 26.", "u": "https://www.yna.co.kr/view/AKR20230816059800051"}]}, {"tab": "챕터 3", "title": "피란학교, 보수동 책방골목, 광복동 다방", "items": [{"t": "부산광역시 임시수도기념관, 「피란학교 천막교실」", "u": "https://www.busan.go.kr/monument/index"}, {"t": "대한민국역사박물관 현대사아카이브, 보수동 책방골목(이미지)", "u": ""}, {"t": "부산광역시 부산근현대역사관 웹진, 「요즘 어느 다방 나가시오?」", "u": "https://www.busan.go.kr/mmch/webzine/1636905"}, {"t": "동아일보, 권영민, [권영민의 그때 그곳]<4> 6·25 당시 예술인들의 아지트, 부산 광복동의 다방 '밀다원', 2012. 12. 24.", "u": "https://www.donga.com/news/article/all/20121224/51800109/1"}, {"t": "연합뉴스, 차근호, [정전 70년, 피란수도 부산] ⑪ 김동리의 '밀다원 시대', 2023. 6. 10.", "u": "https://v.daum.net/v/20230610090018049"}, {"t": "부산광역시, 『부산 발전 50년 역사 이야기(상)』, 생각쉼표·휴먼컬처아리랑, 2015", "u": ""}, {"t": "부산광역시 교과서, 『부산의 재발견』", "u": ""}, {"t": "임시수도기념관, 『한국전쟁과 임시수도 부산』, 2019", "u": ""}]}, {"tab": "챕터 4", "title": "우암동 소막마을, 밀면, 동항성당", "items": [{"t": "공윤경, 「소막마을의 변화와 주민들의 장소 인식」, 『한국민족문화』 제63호, 부산대학교 한국민족문화연구소, 2017", "u": ""}, {"t": "비짓부산, 우암동 소막마을", "u": "https://www.visitbusan.net/index.do?menuCd=DOM_000000201001001000&uc_seq=838&lang_cd=ko"}, {"t": "연합뉴스, 차근호, [정전 70년, 피란수도 부산] (21) 구호물자 밀가루로 만든 밀면, 2023. 8. 19.", "u": "https://www.yna.co.kr/view/AKR20230728064600051"}, {"t": "부산미래유산, 동항성당", "u": "https://www.busan.go.kr/futureheritage/meetfuture01/1685601"}, {"t": "동항성당 웹사이트", "u": "https://donghang.catb.kr/templates/main/?p_srl=15001"}]}];
+function openInfoModal(kind) {
+  const host = document.getElementById('credits');
+  const wrap = document.createElement('div');
+  wrap.style.cssText = "position:absolute;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.62);opacity:0;transition:opacity .22s ease;font-family:'Noto Sans KR',sans-serif;";
+  const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/(\d{4})\. (\d{1,2})\. (\d{1,2})\./g, '$1.\u00a0$2.\u00a0$3.');
+  let body = '', head = '';
+  if (kind === 'ai') {
+    head = 'AI 도구';
+    const row = (lab, txt) => `<div class="imGrp"><div class="imLab">${lab}</div><div class="imTxt">${txt}</div></div>`;
+    body = row('게임 제작 및 홈페이지 제작 코딩', 'Claude Sonnet 5, Claude Sonnet 5.5') + row('이미지 제작', 'GPT-5.5 Instant ~ GPT-6') + row('스토리 아이디어 구상 및 자료 조사', 'GPT-5.5 Instant ~ GPT-6');
+  } else {
+    head = '출처';
+    body = '<div class="imTabs">' + SOURCES.map((s, i) => `<button class="imTab${i ? '' : ' on'}" data-i="${i}">${s.tab}</button>`).join('') + '</div><div class="imSub" id="imSub"></div><div class="imScroll" id="imList"></div>';
+  }
+  wrap.innerHTML = `<style>
+    .imBox{width:620px;max-width:94%;max-height:90%;display:flex;flex-direction:column;padding:34px 44px 30px;background:#f2e8c9;border:3px solid #8a6a3a;border-radius:14px;box-shadow:0 12px 34px rgba(0,0,0,.55);color:#33281c;}
+    .imHead{text-align:center;font:800 24px 'Noto Sans KR',sans-serif;color:#4a2a10;margin-bottom:24px;}
+    .imBody{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;}
+    .imScroll{flex:1;min-height:0;overflow-y:auto;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:rgba(138,106,58,.35) transparent;padding-right:6px;}
+    .imScroll::-webkit-scrollbar{width:6px;}
+    .imScroll::-webkit-scrollbar-track{background:transparent;}
+    .imScroll::-webkit-scrollbar-thumb{background:rgba(138,106,58,.35);border-radius:3px;}
+    .imScroll::-webkit-scrollbar-thumb:hover{background:rgba(138,106,58,.55);}
+    .imGrp{margin-bottom:26px;}
+    .imGrp:last-child{margin-bottom:6px;}
+    .imLab{font:600 14px/1.5 'Noto Sans KR',sans-serif;color:#8a7650;margin-bottom:5px;}
+    .imTxt{font:700 18px/1.5 'Noto Sans KR',sans-serif;color:#33281c;}
+    .imTabs{display:flex;justify-content:center;gap:28px;margin-bottom:22px;border-bottom:1px solid rgba(122,90,37,.3);}
+    .imTab{padding:6px 2px 11px;font:700 16px 'Noto Sans KR',sans-serif;color:#8a7650;background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-1px;cursor:pointer;}
+    .imTab.on{color:#3a2410;border-bottom-color:#b8862e;}
+    .imSub{margin:0 0 14px;font:800 17px 'Noto Sans KR',sans-serif;color:#4a2a10;}
+    .imItem{position:relative;padding:0 0 14px 18px;font:500 15px/1.65 'Noto Sans KR',sans-serif;color:#3d3022;word-break:keep-all;}
+    .imItem::before{content:'-';position:absolute;left:3px;top:0;color:#a8895a;font-weight:700;}
+    .imItem a{color:inherit;text-decoration:none;cursor:pointer;}
+    .imItem a::after{content:' ↗';color:#a8895a;font-weight:700;white-space:nowrap;}
+    .imItem a:hover::after{color:#b8421d;}
+    .imHint{margin-top:2px;font:400 12.5px 'Noto Sans KR',sans-serif;color:#9a8a68;text-align:center;}
+    .imClose{padding:10px 52px;font:800 16px 'Noto Sans KR',sans-serif;color:#fff6dc;background:#5a3418;border:2px solid #3a2008;border-radius:10px;cursor:pointer;box-shadow:0 3px 0 #2a1606;}
+  </style>
+  <div class="imBox"${kind === 'ai' ? '' : ' style="height:560px"'}><div class="imHead">${head}</div><div class="imBody">${body}</div>
+  <div style="margin-top:22px;text-align:center;">${kind === 'ai' ? '' : '<div class="imHint">↗ 표시가 있는 자료는 눌러서 링크로 이동할 수 있어요</div>'}<button class="imClose" style="margin-top:14px;">닫기</button></div></div>`;
+  host.appendChild(wrap);
+  requestAnimationFrame(() => { wrap.style.opacity = '1'; });
+  wrap.addEventListener('click', e => { e.stopPropagation(); if (e.target === wrap) close(); });
+  const showTab = i => {
+    const s = SOURCES[i];
+    wrap.querySelectorAll('.imTab').forEach(b => b.classList.toggle('on', +b.dataset.i === i));
+    wrap.querySelector('#imSub').textContent = (s.title || s.tab).replace(/,\s*/g, ' · ');
+    wrap.querySelector('#imList').innerHTML = s.items.map(it => `<div class="imItem">${it.u ? `<a href="${it.u}" target="_blank" rel="noopener noreferrer">${esc(it.t)}</a>` : esc(it.t)}</div>`).join('');
+    wrap.querySelector('#imList').scrollTop = 0;
+  };
+  if (kind !== 'ai') { wrap.querySelectorAll('.imTab').forEach(b => b.addEventListener('click', () => { SFX.click(); showTab(+b.dataset.i); })); showTab(0); }
+  let done = false;
+  function onKey(e) { if (e.code === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); } }
+  function close() { if (done) return; done = true; window.removeEventListener('keydown', onKey, true); wrap.style.opacity = '0'; setTimeout(() => wrap.remove(), 220); }
+  window.addEventListener('keydown', onKey, true);
+  wrap.querySelector('.imClose').addEventListener('click', () => { SFX.click(); close(); });
+}
+$('#btnSources').addEventListener('click', () => { SFX.click(); openInfoModal('src'); });
+$('#btnAiTools').addEventListener('click', () => { SFX.click(); openInfoModal('ai'); });
 $('#btnCreditsBack').addEventListener('click', async () => { if (busy) return; busy = true; await go('title'); busy = false; });
 $('#btnStart').addEventListener('click', async () => {
   if (busy) return; busy = true;
@@ -1218,7 +1294,7 @@ function openSettings() {          // 설정: 화면 모드 · 대화 스킵 · 
         ${row('소리', seg('stSnd', ['on', '켜기'], ['off', '끄기']), `<div style="display:flex;align-items:center;gap:12px;color:#3a2410;font-weight:600;font-size:14px;">볼륨 <input id="stVol" type="range" min="0" max="100" step="5" aria-label="볼륨" style="flex:1;accent-color:#b8862e;"><span id="stVolN" style="width:44px;text-align:right;"></span></div>`)}
         ${document.fullscreenEnabled ? row('전체 화면', seg('stFs', ['on', '켜기'], ['off', '끄기']), 'ESC를 눌러 전체화면을 끝낼 수 있어요.') : ''}
         ${row('코드 입력', `<div style="display:flex;gap:8px;flex:1;max-width:300px;"><input id="setCode" type="text" autocomplete="off" spellcheck="false" placeholder="코드를 입력하세요" style="flex:1;min-width:0;box-sizing:border-box;padding:8px 12px;font:500 15px 'Noto Sans KR',sans-serif;color:#33281c;background:#fffaf0;border:2px solid #8a6a3a;border-radius:10px;outline:none;"><button id="setOk" class="stBtn">확인</button></div>`, '<span id="setMsg" style="color:#8f2f1d;font-weight:600;"></span>')}
-        <div style="border-top:1px solid rgba(122,90,37,.28);padding-top:16px;text-align:center;"><button id="setClose" style="padding:11px 64px;font:800 17px 'Noto Sans KR',sans-serif;color:#fff6dc;background:#5a3418;border:2px solid #3a2008;border-radius:10px;cursor:pointer;box-shadow:0 3px 0 #2a1606;">닫기</button></div>
+        <div style="border-top:1px solid rgba(122,90,37,.28);padding-top:16px;text-align:center;display:flex;justify-content:center;gap:12px;"><button id="setSite" class="site-btn" style="position:relative;padding:11px 22px;font:800 17px 'Noto Sans KR',sans-serif;color:#4a2a10;background:#f0cf7a;border:2px solid #8a6a3a;border-radius:10px;cursor:pointer;box-shadow:0 3px 0 #a47e34;">게임 공식 사이트</button><button id="setClose" style="padding:11px 46px;font:800 17px 'Noto Sans KR',sans-serif;color:#fff6dc;background:#5a3418;border:2px solid #3a2008;border-radius:10px;cursor:pointer;box-shadow:0 3px 0 #2a1606;">닫기</button></div>
       </div>`;
     (document.getElementById('stage') || document.body).appendChild(wrap);
     requestAnimationFrame(() => { wrap.style.opacity = '1'; });
@@ -1249,6 +1325,7 @@ function openSettings() {          // 설정: 화면 모드 · 대화 스킵 · 
       SFX.click();
       try { if (b.dataset.v === 'on') { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {}); } else if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); } catch (_) {}
     }));
+    wrap.querySelector('#setSite').addEventListener('click', () => { SFX.click(); window.open('https://jjh0104kr.github.io/webbusan2026/', '_blank', 'noopener'); });
     const onFs = () => paint(); document.addEventListener('fullscreenchange', onFs);
     vol.addEventListener('input', () => { SFX.setVolume(vol.value / 100); volN.textContent = vol.value + '%'; if (SFX.muted && vol.value > 0) { SFX.setMuted(false); paint(); } });
     vol.addEventListener('change', () => SFX.click());
